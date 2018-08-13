@@ -1,6 +1,6 @@
 # CoreNLP example API
 
-Created to analyze node-corenlp and sentiment libraries functionality. This is backand part of the project.
+Created to analyze node-corenlp and sentiment libraries functionality. This is backend part of the project.
 
 ## Installing and Starting
 
