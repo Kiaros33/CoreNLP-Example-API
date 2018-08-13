@@ -1,0 +1,59 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register --timeout 25000 server/tests/*.test.js ",
+    "start": "concurrently \"npm run java\" \"npm run server\"",
+    "server": "cd ./server && babel-node server.js --presets es2015,stage-2",
+    "lint-staged": "lint-staged",
+    "lint:js": "eslint",
+    "postinstall": "curl -O https://nlp.stanford.edu/software/stanford-corenlp-full-2018-02-27.zip && unzip stanford-corenlp-full-2018-02-27.zip && rm stanford-corenlp-full-2018-02-27.zip && mv stanford-corenlp-full-2018-02-27 corenlp",
+    "java": "cd ./corenlp && java -mx4g -cp '*' edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 15000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.6.1",
+    "corenlp": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "sentiment": "^5.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^5.2.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.13.0",
+    "expect": "^23.4.0",
+    "lint-staged": "^7.2.0",
+    "mocha": "^5.2.0",
+    "pre-commit": "^1.2.2",
+    "supertest": "^3.1.0"
+  },
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "airbnb-base",
+      "prettier"
+    ],
+    "env": {
+      "node": true
+    }
+  }
+}
